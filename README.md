@@ -1,5 +1,12 @@
 # Passive Microwave Earth Science Data Record (PMESDR) System
 
+## Acknowledgment
+
+This repository is based on the NSIDC `pmesdr` project and includes modifications and extensions.
+
+Original source:
+https://github.com/nsidc/pmesdr
+
 [![DOI](https://zenodo.org/badge/650816222.svg)](https://zenodo.org/doi/10.5281/zenodo.13357476)
 
 <figure>
