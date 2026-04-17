@@ -34,7 +34,10 @@ CONDA_ACTIVATE=source $$(conda info --base)/etc/profile.d/conda.sh ; conda activ
 #	C compiler options, debug or optimization settings
 #
 #
-CONFIG_CFLAGS = 
+CONFIG_CFLAGS = \
+  -I$(NETCDF4_INCDIR) \
+  -I$(HDF5_INCDIR) \
+  -I$(UDUNITS_INCDIR)
 
 #
 #	system libraries and include directories
@@ -56,13 +59,13 @@ else ifeq ($(LOCALE),ALPINEicc)
   UDUNITS_LIBDIR = ${CURC_UDUNITS_LIB}
 else
   $(info Assuming default, mileage may vary)
-  NETCDF4_INCDIR = /usr/include
-  NETCDF4_LIBDIR = /usr/lib64
-  HDF5_INCDIR = /usr/include
-  HDF5_LIBDIR = /usr/lib64
-  ZLIB_LIBDIR = /usr/lib64
-  UDUNITS_INCDIR = /usr/include
-  UDUNITS_LIBDIR = /usr/lib64
+  NETCDF4_INCDIR = $(CONDA_PREFIX)/include
+  NETCDF4_LIBDIR = $(CONDA_PREFIX)/lib
+  HDF5_INCDIR = $(CONDA_PREFIX)/include
+  HDF5_LIBDIR = $(CONDA_PREFIX)/lib
+  ZLIB_LIBDIR = $(CONDA_PREFIX)/lib
+  UDUNITS_INCDIR = $(CONDA_PREFIX)/include
+  UDUNITS_LIBDIR = $(CONDA_PREFIX)/lib
 endif
 
 # Python env for regression testing

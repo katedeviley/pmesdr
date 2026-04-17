@@ -87,8 +87,8 @@ else ifeq ($(LOCALE),JANUSgcc)
   HDF5_LIBDIR = ${CURC_HDF5_LIB}
 else
   $(info Assuming default LOCALE)
-  NETCDF4_LIBDIR = /usr/lib64
-  HDF5_LIBDIR = /usr/lib64
+  NETCDF4_LIBDIR = $(CONDA_PREFIX)/lib
+  HDF5_LIBDIR = $(CONDA_PREFIX)/lib
 endif
 
 #

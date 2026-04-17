@@ -265,6 +265,7 @@ typedef enum {
   CETB_F19,
   CETB_SMAP,
   CETB_GCOMW1,
+  CETB_GOSATGW,
   CETB_NUM_PLATFORMS
 } cetb_platform_id;
 
@@ -285,7 +286,8 @@ static const char *cetb_platform_id_name[] = {
   "F18",
   "F19",
   "SMAP",
-  "GCOMW1"
+  "GCOMW1",
+  "GOSATGW"
 };
 
 /*
@@ -310,7 +312,8 @@ static const char *cetb_gcmd_platform_keyword[] = {
   "DMSP 5D-3/F18 > Defense Meteorological Satellite Program-F18",
   "DMSP 5D-3/F19 > Defense Meteorological Satellite Program-F19",
   "SMAP > Soil Moisture Active and Passive Observatory",
-  "GCOM-W1 > Global Change Observation Mission 1st-Water"
+  "GCOM-W1 > Global Change Observation Mission 1st-Water",
+  "GOSAT-GW > Greenhouse gas Observing Satellite"
 };
 
 /*
@@ -324,6 +327,7 @@ typedef enum {
   CETB_SSMIS,
   CETB_SMAP_RADIOMETER,
   CETB_AMSR2,
+  CETB_AMSR3,
   CETB_NUM_SENSORS
 } cetb_sensor_id;
 
@@ -336,7 +340,8 @@ static const char *cetb_sensor_id_name[] = {
   "SSMI",
   "SSMIS",
   "LRM",
-  "AMSR2"
+  "AMSR2",
+  "AMSR3"
 };
 
 /* need to be able to map platform ID to sensor ID in meas_meta_setup */
@@ -354,7 +359,8 @@ static const cetb_sensor_id cetb_platform_to_sensor[] = {
   CETB_SSMIS,
   CETB_SSMIS,
   CETB_SMAP_RADIOMETER,
-  CETB_AMSR2
+  CETB_AMSR2,
+  CETB_AMSR3,
 };
 
 /* Need to be able to map sensor ID and producer ID to NSIDC dataset ID */
@@ -386,7 +392,8 @@ static const char *cetb_gcmd_sensor_keyword[] = {
   "SSM/I > Special Sensor Microwave/Imager",
   "SSMIS > Special Sensor Microwave Imager/Sounder",
   "SMAP L-BAND RADIOMETER > SMAP L-Band Radiometer",
-  "AMSR2 > Advanced Microwave Scanning Radiometer 2"
+  "AMSR2 > Advanced Microwave Scanning Radiometer 2",
+  "AMSR3 > Advanced Microwave Scanning Radiometer 3"
 };
 
 /*
@@ -780,5 +787,77 @@ static const cetb_amsr2_channel_id cetb_ibeam_to_cetb_amsr2_channel[] = {
   AMSR2_89BV
 };
   
+/*
+ * AMSR3 channel IDs
+ */
+typedef enum {
+  AMSR3_NO_CHANNEL=-1,
+  AMSR3_06H,
+  AMSR3_06V,
+  AMSR3_10H,
+  AMSR3_10V,
+  AMSR3_18H,
+  AMSR3_18V,
+  AMSR3_23H,
+  AMSR3_23V,
+  AMSR3_36H,
+  AMSR3_36V,
+  AMSR3_89AH,
+  AMSR3_89AV,
+  AMSR3_89BH,
+  AMSR3_89BV,
+  AMSR3_165V,
+  AMSR3_183V_7,
+  AMSR3_183V_3,
+  AMSR3_NUM_CHANNELS
+} cetb_amsr3_channel_id;
+
+/*
+ * AMSR3 channel ID names
+*/
+static const char *cetb_amsr3_channel_name[] = {
+  "6.9H",
+  "6.9V",
+  "10.7H",
+  "10.7V",
+  "18H",
+  "18V",
+  "23H",
+  "23V",
+  "36H",
+  "36V",
+  "89H",
+  "89V",
+  "89H",
+  "89V",
+  "165V",
+  "183V_7",
+  "183V_3"
+};
+
+/*
+ * See notes for using cetb_ibeam_to_cetb_ssmi_channel, above.
+ */
+static const cetb_amsr3_channel_id cetb_ibeam_to_cetb_amsr3_channel[] = {
+  AMSR3_NO_CHANNEL,
+  AMSR3_06H,
+  AMSR3_06V,
+  AMSR3_10H,
+  AMSR3_10V,
+  AMSR3_18H,
+  AMSR3_18V,
+  AMSR3_23H,
+  AMSR3_23V,
+  AMSR3_36H,
+  AMSR3_36V,
+  AMSR3_89AH,
+  AMSR3_89AV,
+  AMSR3_89BH,
+  AMSR3_89BV,
+  AMSR3_165V,
+  AMSR3_183V_7,
+  AMSR3_183V_3, 
+}; 
+
 #endif // cetb_H
 

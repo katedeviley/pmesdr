@@ -224,7 +224,9 @@ int get_gsx_dims( gsx_class *this ) {
  *    
  */
 int get_gsx_global_attributes( gsx_class *this ) {
-  
+
+  fprintf(stderr, "\n\n*** ENTERED get_gsx_global_attributes (NEW BUILD) ***\n\n");
+
   int i;
   char *temp;
   
@@ -259,6 +261,7 @@ int get_gsx_global_attributes( gsx_class *this ) {
     fprintf( stderr, "%s: no short_platform\n", __FUNCTION__ );
     return -1;
   }
+
   this->short_platform = CETB_NO_PLATFORM;
   for ( i=0; i< CETB_NUM_PLATFORMS; i++ ) {
     if ( 0 == strncmp( cetb_platform_id_name[i], temp, strlen(temp) ) ) {
@@ -273,6 +276,7 @@ int get_gsx_global_attributes( gsx_class *this ) {
     fprintf( stderr, "%s: no short_sensor\n", __FUNCTION__ );
     return -1;
   }
+
   this->short_sensor = CETB_NO_SENSOR;
   for ( i=0; i< CETB_NUM_SENSORS; i++ ) {
     if ( 0 == strncmp( cetb_sensor_id_name[i], temp, strlen(temp) ) ) {
@@ -287,6 +291,7 @@ int get_gsx_global_attributes( gsx_class *this ) {
     fprintf( stderr, "%s: no input_provider\n", __FUNCTION__ );
     return -1;
   }
+
   this->input_provider = CETB_NO_PRODUCER;
   for ( i=0; i< CETB_NUM_PRODUCERS; i++ ) {
     if ( 0 == strncmp( cetb_swath_producer_id_name[i], temp, strlen(temp) ) ) {
@@ -373,6 +378,9 @@ int get_gsx_global_variables( gsx_class *this ) {
     break;
   case CETB_AMSR2:
     this->channel_number = AMSR2_NUM_CHANNELS;
+    break;
+  case CETB_AMSR3:
+    this->channel_number = AMSR3_NUM_CHANNELS;
     break;
   default:
     fprintf( stderr, "%s: sensor not implemented yet \n", __FUNCTION__ );
@@ -1051,6 +1059,14 @@ int assign_channels( gsx_class *this, char *channel ) {
     while ( ( 0 != strcmp( gsx_amsr2_channel_name[count], channel ) ) &&
 	    ( count < (int) AMSR2_NUM_CHANNELS ) ) count++;
     if ( AMSR2_NUM_CHANNELS == count ) {
+      status = -1;
+    }
+    break;
+  case CETB_AMSR3:
+    count = 0;
+    while ( ( 0 != strcmp( gsx_amsr3_channel_name[count], channel ) ) &&
+	    ( count < (int) AMSR3_NUM_CHANNELS ) ) count++;
+    if ( AMSR3_NUM_CHANNELS == count ) {
       status = -1;
     }
     break;

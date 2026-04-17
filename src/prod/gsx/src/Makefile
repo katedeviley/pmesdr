@@ -62,11 +62,11 @@ else ifeq ($(LOCALE),ALPINEicc)
   HDF5_LIBDIR = ${CURC_HDF5_LIB}
 else
   $(info Assuming default LOCALE, mileage may vary)
-  NETCDF4_INCDIR = /usr/include
-  NETCDF4_LIBDIR = /usr/lib64
-  HDF5_INCDIR = /usr/include
-  HDF5_LIBDIR = /usr/lib64
-  ZLIB_LIBDIR = /usr/lib64
+  NETCDF4_INCDIR = $(CONDA_PREFIX)/include
+  NETCDF4_LIBDIR = $(CONDA_PREFIX)/lib
+  HDF5_INCDIR = $(CONDA_PREFIX)/include
+  HDF5_LIBDIR = $(CONDA_PREFIX)/lib
+  ZLIB_LIBDIR = $(CONDA_PREFIX)/lib
 endif
 
 #

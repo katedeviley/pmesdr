@@ -11,6 +11,8 @@
 #
 #	installation directories
 #
+export PMESDR_TOP_DIR=/home/kdeviley/pmesdr
+
 TOPDIR = $(PMESDR_TOP_DIR)
 BINDIR = $(TOPDIR)/bin
 LIBDIR = $(TOPDIR)/lib
@@ -38,7 +40,7 @@ endif
 #       debug or optimization settings
 #       these may be things that are machine-specific
 #
-CONFIG_CFLAGS =
+CONFIG_CFLAGS = -O2 -I$(INCDIR)
 
 #
 #	system libraries
@@ -49,7 +51,7 @@ SYSLIBS = -lm
 # end configuration section
 #------------------------------------------------------------------------
 LIBS = -L$(LIBDIR) -lutils $(SYSLIBS)
-CFLAGS = -I$(INCDIR)  -m64 $(CONFIG_CFLAGS) -Wall -Wno-unused-variable
+CFLAGS = -I$(INCDIR) -m64 $(CONFIG_CFLAGS) -Wall -Wno-unused-variable
 ifeq ($(LOCALE),ALPINEicc)
   $(info Build location: $(LOCALE))
   CFLAGS = -D'ALPINEicc=1' -I$(INCDIR) $(CONFIG_CFLAGS) -O3 -ipo -xHost -Wall -Wremarks -wd981 -no-prec-div -wd2415

@@ -44,7 +44,8 @@ static void get_region_data(int regnum, int resolution_ind, int *iproj, float *l
 
 int main(int argc,char *argv[])
 {
- 
+  fprintf( stderr, "DEBUG VERSION RUNNING\n");
+
   char mname[256];  
   time_t tod;
   char ltime[29];
@@ -141,11 +142,12 @@ int main(int argc,char *argv[])
   /* get satellite number as a cetb_platform_id enum */
   sscanf(argv[argn],"%s",platform);
   argn++;
+
   /* decode platform number */
   while( Fn < (int)CETB_NUM_PLATFORMS ) {
     if ( 0 == strcmp( cetb_platform_id_name[Fn], platform ) ) {
-	F_num = (cetb_platform_id)Fn;
-	Fn = CETB_NUM_PLATFORMS;
+      F_num = (cetb_platform_id)Fn;
+      Fn = CETB_NUM_PLATFORMS;
     }
     Fn++;
   }
@@ -643,6 +645,7 @@ static int get_region_parms( FILE *mout, int *argn, char *argv[], int F_num,
       if ( CETB_F16 <= F_num && F_num <= CETB_F19 ) sen='I';
       if ( CETB_SMAP == F_num ) sen='S';
       if ( CETB_GCOMW1 == F_num ) sen = 'G';
+      if ( CETB_GOSATGW == F_num ) sen = 'N';
       /* F=ssmi, A=AMSRE/AQUA, R=SMMR, I=SSMIS, S=SMAP, G=GCOMW1/AMSR2 */
       if (F_num < 10.0) /* code the sensor number based on cetb_platform_id*/
 	cegg=(char) (F_num+48);  /* 0...9 */

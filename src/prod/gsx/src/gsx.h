@@ -142,6 +142,26 @@ static const char *gsx_amsr2_channel_name[] = {
   "brightness_temperature_89BV"
 };
 
+static const char *gsx_amsr3_channel_name[] = {
+  "brightness_temperature_6.9H",
+  "brightness_temperature_6.9V",
+  "brightness_temperature_10.7H",
+  "brightness_temperature_10.7V",
+  "brightness_temperature_18H",
+  "brightness_temperature_18V",
+  "brightness_temperature_23H",
+  "brightness_temperature_23V",
+  "brightness_temperature_37H",
+  "brightness_temperature_37V",
+  "brightness_temperature_89AH",
+  "brightness_temperature_89AV",
+  "brightness_temperature_89BH",
+  "brightness_temperature_89BV",
+  "brightness_temperature_165V",
+  "brightness_temperature_183V_7",
+  "brightness_temperature_183V_3"
+};
+
 typedef enum {
   CETB_NOLOC=-1,
   CETB_LOC1,

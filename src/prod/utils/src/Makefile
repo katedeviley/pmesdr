@@ -60,9 +60,9 @@ else ifeq ($(LOCALE),ALPINEicc)
   UDUNITS_INCDIR = ${CURC_UDUNITS_INC}
 else
   $(info Assuming default LOCALE, mileage may vary)
-  NETCDF4_LIBDIR = /usr/lib64
-  HDF5_LIBDIR = /usr/lib64
-  ZLIB_LIBDIR = /usr/lib64
+  NETCDF4_LIBDIR = $(CONDA_PREFIX)/lib
+  HDF5_LIBDIR = $(CONDA_PREFIX)/lib
+  ZLIB_LIBDIR = $(CONDA_PREFIX)/lib
 endif
 
 #

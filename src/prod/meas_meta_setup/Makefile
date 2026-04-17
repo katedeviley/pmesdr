@@ -36,7 +36,7 @@ endif
 #       debug or optimization settings
 #       these may be things that are machine-specific
 #
-CONFIG_CFLAGS = -O3 -m64
+CONFIG_CFLAGS = -O3 -m64 -I$(NETCDF4_INCDIR) -I$(HDF5_INCDIR) -I$(UDUNITS_INCDIR)
 
 
 #
@@ -70,18 +70,21 @@ else ifeq ($(LOCALE),ALPINEicc)
   UDUNITS_LIBDIR = ${CURC_UDUNITS_LIB}
 else
   $(info Assuming default LOCALE, mileage may vary)
-  NETCDF4_INCDIR = /usr/include
-  NETCDF4_LIBDIR = /usr/lib64
-  HDF5_INCDIR = /usr/include
-  HDF5_LIBDIR = /usr/lib64
-  UDUNITS_INCDIR = /usr/include
-  UDUNITS_LIBDIR = /usr/lib64
+  NETCDF4_INCDIR = $(CONDA_PREFIX)/include
+  NETCDF4_LIBDIR = $(CONDA_PREFIX)/lib
+  HDF5_INCDIR = $(CONDA_PREFIX)/include
+  HDF5_LIBDIR = $(CONDA_PREFIX)/lib
+  HDFLIB1 = hdf5_hl
+  HDFLIB2 = hdf5
+  UDUNITS_INCDIR = $(CONDA_PREFIX)/include
+  UDUNITS_LIBDIR = $(CONDA_PREFIX)/lib
 endif
 
 #
 # end configuration section
 #------------------------------------------------------------------------
-LIBS = -L$(LIBDIR) -L$(NETCDF4_LIBDIR) -L$(HDF5_LIBDIR) -L$(UDUNITS_LIBDIR) \
+LIBS = -Wl,-rpath,$(HDF5_LIBDIR) -Wl,-rpath,$(NETCDF4_LIBDIR) -Wl,-rpath,$(UDUNITS_LIBDIR) \
+  -L$(LIBDIR) -L$(NETCDF4_LIBDIR) -L$(HDF5_LIBDIR) -L$(UDUNITS_LIBDIR) \
 	-lgsx -lutils -lcalcalcs -ludunits2 \
 	-lnetcdf -l$(HDFLIB1) -l$(HDFLIB2) -lz $(SYSLIBS)
 CFLAGS = -I$(INCDIR) -I$(NETCDF4_INCDIR) -I$(HDF5_INCDIR) -I$(UDUNITS_INCDIR) \

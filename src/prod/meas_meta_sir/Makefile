@@ -73,16 +73,20 @@ else ifeq ($(LOCALE),ALPINEicc)
   UDUNITS_LIBDIR = ${CURC_UDUNITS_LIB}
 else
   $(info Assuming default LOCALE, mileage may vary)
-  NETCDF4_LIBDIR = /usr/lib64
-  HDF5_LIBDIR = /usr/lib64
+  NETCDF4_LIBDIR = $(CONDA_PREFIX)/lib
+  HDF5_LIBDIR = $(CONDA_PREFIX)/lib
+  HDFLIB1 = hdf5_hl
+  HDFLIB2 = hdf5
 endif
 
 #
 # end configuration section
 #------------------------------------------------------------------------
-LIBS = -L$(LIBDIR) -L$(NETCDF4_LIBDIR) -L$(HDF5_LIBDIR) \
-	-lutils -lcetb -lcalcalcs -ludunits2 -lnetcdf \
-	-l$(HDFLIB1) -l$(HDFLIB2) -lz $(SYSLIBS) 
+LIBS = -Wl,-rpath,$(NETCDF4_LIBDIR) \
+  -Wl,-rpath,$(HDF5_LIBDIR) -Wl,-rpath,$(CONDA_PREFIX)/lib \
+  -L$(LIBDIR) -L$(NETCDF4_LIBDIR) -L$(HDF5_LIBDIR) \
+  -lutils -lcetb -lcalcalcs -ludunits2 -lnetcdf \
+  -l$(HDFLIB1) -l$(HDFLIB2) -lz $(SYSLIBS)
 CFLAGS = -I$(INCDIR) -I$(NETCDF4_INCDIR) $(CONFIG_CFLAGS) \
 	-Wall -Wno-unused-variable -Wno-unused-but-set-variable
 ifeq ($(LOCALE),ALPINEicc)
