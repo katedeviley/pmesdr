@@ -37,7 +37,7 @@ endif
 #       debug or optimization settings
 #       these may be things that are machine-specific
 #
-CONFIG_CFLAGS =
+CONFIG_CFLAGS = -I$(TOPDIR)/include
 
 #
 #	system libraries

@@ -224,9 +224,7 @@ int get_gsx_dims( gsx_class *this ) {
  *    
  */
 int get_gsx_global_attributes( gsx_class *this ) {
-
-  fprintf(stderr, "\n\n*** ENTERED get_gsx_global_attributes (NEW BUILD) ***\n\n");
-
+  
   int i;
   char *temp;
   
