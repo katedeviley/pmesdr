@@ -478,6 +478,7 @@ static const char *cetb_swath_producer_id_name[] = {
   "JPL",
   "CSU_ICDR",
   "PPS_XCAL",
+  "JAXA"
 };
 
 /*
