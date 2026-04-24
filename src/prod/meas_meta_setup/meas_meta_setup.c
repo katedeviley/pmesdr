@@ -570,7 +570,12 @@ int main(int argc,char *argv[])
 			     (int)AMSR2_89AH, (int)AMSR2_89BH);
 	combine_setup_files( outpath, &save_area, 1 , (int *)cetb_ibeam_to_cetb_amsr2_channel,
 			     (int)AMSR2_89AV, (int)AMSR2_89BV);
-      }
+      } else if ( CETB_GOSATGW == cetb_platform )  {
+  combine_setup_files( outpath, &save_area, 1 , (int *)cetb_ibeam_to_cetb_amsr3_channel,
+            (int)AMSR3_89AH, (int)AMSR3_89BH);
+  combine_setup_files( outpath, &save_area, 1 , (int *)cetb_ibeam_to_cetb_amsr3_channel,
+            (int)AMSR3_89AV, (int)AMSR3_89BV);
+    }
       fprintf( stderr, "%s: First file to be read\n", __FILE__ );
     } else {
       fprintf( stderr, "%s: Subsequent file to be read\n", __FILE__ );
@@ -618,7 +623,7 @@ int main(int argc,char *argv[])
 	       __FILE__ );
       exit( -1 );
     }
-    
+
     for ( loc=0; loc<GSX_MAX_DIMS; loc++ ) {
       
       /* Get the times of the first and last scan in the measurement set */
@@ -887,7 +892,9 @@ int main(int argc,char *argv[])
 		gsx_count = cetb_ibeam_to_cetb_smap_channel[ibeam];
 	      else if ( CETB_AMSR2 == gsx->short_sensor )
 		gsx_count = cetb_ibeam_to_cetb_amsr2_channel[ibeam];
-	      else {
+        else if ( CETB_AMSR3 == gsx->short_sensor ) 
+		gsx_count = cetb_ibeam_to_cetb_amsr3_channel[ibeam];
+       else {
 		fprintf( stderr, "%s ****ERROR: Invalid short sensor name %d\n",
 			 __FUNCTION__, gsx->short_sensor );
 		continue;
@@ -926,6 +933,7 @@ int main(int argc,char *argv[])
 		 * check ascending/descending orbit pass flag
 		 * (see cetb.h for definitions)
 		 */
+
 		iasc=save_area.sav_ascdes[iregion];
 		if (iasc != (int)CETB_ALL_PASSES) {
 		  if (iasc == (int)CETB_ASC_PASSES) {
@@ -1239,7 +1247,7 @@ int main(int argc,char *argv[])
       fclose(save_area.reg_lu[j]);
       save_area.reg_lu[j] = NULL;
     } else {
-        if ( CETB_AQUA == cetb_platform || CETB_GCOMW1 == cetb_platform ) {
+        if ( CETB_AQUA == cetb_platform || CETB_GCOMW1 == cetb_platform  || CETB_GOSATGW == cetb_platform) {
 	  /* now check to see if you have b channels for 89H or 89V and if you also
 	     have A channels then combine */
 	  if ( CETB_AQUA == cetb_platform ) {
@@ -1255,6 +1263,13 @@ int main(int argc,char *argv[])
 	    combine_setup_files( outpath, &save_area, 2 , (int *)cetb_ibeam_to_cetb_amsr2_channel,
 				 (int)AMSR2_89AV, (int)AMSR2_89BV);
 	  }
+
+    if ( CETB_GOSATGW == cetb_platform ) {
+      combine_setup_files( outpath, &save_area, 2 , (int *)cetb_ibeam_to_cetb_amsr3_channel,
+        (int)AMSR3_89AH, (int)AMSR3_89BH);
+      combine_setup_files( outpath, &save_area, 2 , (int *)cetb_ibeam_to_cetb_amsr3_channel,
+        (int)AMSR3_89AV, (int)AMSR3_89BV);
+    }
 	    
 	  if ( NULL != save_area.reg_lu[j] ) {
 	    fprintf( stderr, "%s: back from combin with fileid != NULL", __FUNCTION__ );
@@ -2477,6 +2492,40 @@ static int box_size_by_channel( int ibeam, cetb_sensor_id id,
       *box_size = -1;
       fprintf( stderr, "%s: bad channel number %d\n", __FUNCTION__, ibeam );
     }
+  } else if ( CETB_AMSR3 == id ) {
+    switch ( cetb_ibeam_to_cetb_amsr3_channel[ibeam] ) {
+      case AMSR3_06H:
+      case AMSR3_06V:
+        *box_size = 20;
+        break;
+      case AMSR3_10H:
+      case AMSR3_10V:
+        *box_size = 20;
+        break;
+      case AMSR3_18H:
+      case AMSR3_18V:
+        *box_size = 22;
+        break;
+      case AMSR3_23H:
+      case AMSR3_23V:
+        *box_size = 26;
+        break;
+      case AMSR3_36H:
+      case AMSR3_36V:
+        *box_size = 24;
+        break;
+      case AMSR3_89AH:
+      case AMSR3_89AV:
+        *box_size = 20;
+        break;
+      case AMSR3_89BH:
+      case AMSR3_89BV:
+        *box_size = 20;
+        break;
+      default:
+        *box_size = -1;
+        fprintf( stderr, "%s: bad channel number %d\n", __FUNCTION__, ibeam );
+      }
   } else {
     *box_size = -1;
     fprintf( stderr, "%s: bad sensor id %d box size not known\n", __FUNCTION__, id );

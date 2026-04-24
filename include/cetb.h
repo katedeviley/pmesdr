@@ -466,6 +466,7 @@ typedef enum { CETB_NO_PRODUCER=-1,
   CETB_JPL,
   CETB_CSU_ICDR,
   CETB_PPS_XCAL,
+  CETB_JAXA,
   CETB_NUM_PRODUCERS
 } cetb_swath_producer_id;
 
@@ -807,9 +808,6 @@ typedef enum {
   AMSR3_89AV,
   AMSR3_89BH,
   AMSR3_89BV,
-  AMSR3_165V,
-  AMSR3_183V_7,
-  AMSR3_183V_3,
   AMSR3_NUM_CHANNELS
 } cetb_amsr3_channel_id;
 
@@ -831,9 +829,6 @@ static const char *cetb_amsr3_channel_name[] = {
   "89AV",
   "89BH",
   "89BV",
-  "165V",
-  "183V_7",
-  "183V_3"
 };
 
 /*
@@ -855,9 +850,6 @@ static const cetb_amsr3_channel_id cetb_ibeam_to_cetb_amsr3_channel[] = {
   AMSR3_89AV,
   AMSR3_89BH,
   AMSR3_89BV,
-  AMSR3_165V,
-  AMSR3_183V_7,
-  AMSR3_183V_3, 
 }; 
 
 #endif // cetb_H

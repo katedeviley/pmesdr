@@ -156,10 +156,7 @@ static const char *gsx_amsr3_channel_name[] = {
   "brightness_temperature_89AH",
   "brightness_temperature_89AV",
   "brightness_temperature_89BH",
-  "brightness_temperature_89BV",
-  "brightness_temperature_165V",
-  "brightness_temperature_183V_7",
-  "brightness_temperature_183V_3"
+  "brightness_temperature_89BV"
 };
 
 typedef enum {

@@ -1488,7 +1488,7 @@ char *cetb_template_filename( cetb_sensor_id sensor_id,
   }
 
   if ( CETB_AMSR3 == sensor_id ) {
-    if (CETB_PPS_XCAL == producer_id ) {
+    if (CETB_JAXA == producer_id ) {
       *cetb_dataset_id_index = CETB_NSIDC_0630;
     } else {
       fprintf( stderr, "%s: Invalid sensor_id=%d producer_id=%d combination\n",
