@@ -825,10 +825,10 @@ static const char *cetb_amsr3_channel_name[] = {
   "23V",
   "36H",
   "36V",
-  "89AH",
-  "89AV",
-  "89BH",
-  "89BV",
+  "89H",
+  "89V",
+  "89H",
+  "89V"
 };
 
 /*

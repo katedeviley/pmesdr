@@ -2866,7 +2866,8 @@ static int ltod_split_time( cetb_platform_id platform_id,
 				     Stable until 2021 */
     { {0.0, 12.0}, {0.0, 12.0} }, /* CETB_F19 platform, N or S projection */
     { {0.0, 12.0}, {0.0, 12.0} }, /* CETB_SMAP platform, N or S projection */
-    { {-4.0, 8.0}, {-4.0, 8.0} }  /* CETB_GCOMW1 platform, N or S projection */
+    { {-4.0, 8.0}, {-4.0, 8.0} }, /* CETB_GCOMW1 platform, N or S projection */
+    { {-4.0, 8.0}, {-4.0, 8.0} }  /* CETB_GOSATGW platform */
   };
 
   /* note that the degenerative case of the satellite/year
@@ -2878,7 +2879,7 @@ static int ltod_split_time( cetb_platform_id platform_id,
      1 and the negative ltod time is NOT flagged as an error
   */
   if ( platform_id == CETB_NIMBUS7 || platform_id == CETB_AQUA ||
-       platform_id == CETB_GCOMW1 ) {
+       platform_id == CETB_GCOMW1 || platform_id == CETB_GOSATGW ) {
     negative_flag = 1;
   } else {
     /*
