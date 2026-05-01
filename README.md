@@ -211,12 +211,6 @@ conda package on anaconda.org, see below for installation instructions. See
 
 ## Installation 
 
-Install the the PMESDR system by cloning the repo:
-
-``` bash
-git clone git@github.com:nsidc/pmesdr
-```
-
 Always start working on the system by setting the system environment variables
 expected by scripts and Makefiles:
 
