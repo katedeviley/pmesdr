@@ -10,6 +10,8 @@ on:
       - main
     types:
       - closed
+permissions:
+  contents: write
 jobs:
   do-bumpversion:
     if: ${{ github.event_name == 'push' || github.event.pull_request.merged == true }}
@@ -24,12 +26,13 @@ jobs:
         with:
           miniconda-version: "latest"
           activate-environment: test
+          python-version: "3.11" 
           channels: conda-forge
           show-channel-urls: true
           use-only-tar-bz2: true
       - run: |
-          conda install bump-my-version
-          bump-my-version bump patch --tag --message "[skip actions] bump version {current_version} -> {new_version}"
+          conda install bumpversion
+          bumpversion --tag --message "[skip actions] bump version {current_version} -> {new_version}" patch
           tagName=$(/usr/bin/git tag -l)
           /usr/bin/git pull
           /usr/bin/git push --atomic origin main ${tagName}
