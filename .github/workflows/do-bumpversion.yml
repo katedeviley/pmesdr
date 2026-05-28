@@ -24,11 +24,12 @@ jobs:
         with:
           miniconda-version: "latest"
           activate-environment: test
+          python-version: "3.11" 
           channels: conda-forge
           show-channel-urls: true
           use-only-tar-bz2: true
       - run: |
-          conda install "bumpversion==1.0.1"
+          conda install bumpversion
           bumpversion --tag --message "[skip actions] bump version {current_version} -> {new_version}" patch
           tagName=$(/usr/bin/git tag -l)
           /usr/bin/git pull
